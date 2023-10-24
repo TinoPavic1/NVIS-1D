@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en"></html>
+
+<html>
+
+
+<head>
+  <title>NVIS v128 TinoPavic VK3EGN</title> 
+  <!--  <meta name="viewport" content="width=device-width">   -->
+</head>
+
+<body>
+
+<style> 
+   .myDiv {
+      border: 5px outset red;
+      background-color: lightblue;    
+      text-align: left;
+   }
+   </style>
+
+<div class="myDiv">
+  <select style="font-size: 30px" id="selAct" name="selAct" onchange="selChange()">
+    <option value=1 selected>View Table</option>
+    <option value=2>View SNR</option>
+    <option value=3>View Skip</option>
+    <option value=4>View SLM</option>   
+    <option value=9>View Help</option>
+  </select>
+  
+  <select style="font-size: 30px" id="statex" name="statex" onchange="selChange()">
+    <option value=-35.3>ACT</option>
+    <option value=-34>NSW</option>
+    <option value=-37 selected>VIC</option>
+    <option value=-27.2>QLD</option>
+    <option value=-31>SA</option>
+    <option value=-32>WA</option>
+    <option value=-43>TAS</option>
+    <option value=-12>NT</option>
+  </select>
+
+  <select style="font-size: 30px" id="month" name="month" onchange="selChange()">
+    <option value=1>Jan</option>
+    <option value=2>Feb</option>
+    <option value=3> Mar</option>
+    <option value=4 selected>Apr</option>
+    <option value=5>May</option>
+    <option value=6 >Jun</option>
+    <option value=7>Jul</option>
+    <option value=8>Aug</option>
+    <option value=9>Sep</option>
+    <option value=10>Oct</option>
+    <option value=11>Nov</option>
+    <option value=12>Dec</option>
+  </select>
+
+  <select style="font-size: 30px" id="year" name="year" onchange="selChange()">
+    <option value=2020>2020</option>
+    <option value=2021>2021</option>
+    <option value=2022>2022</option>
+    <option value=2023 selected>2023</option>
+    <option value=2024>2024</option>
+    <option value=2025>2025</option>
+    <option value=2026>2026</option>
+  </select>
+
+  <select style="font-size: 30px" id="hiF2" name="hiF2" onchange="selChange()">
+    <option value=160 >hF2: 160 km</option>
+    <option value=180 >hF2: 180 km</option>
+    <option value=200 >hF2: 200 km</option>
+    <option value=250>hF2: 250 km</option>
+    <option value=300 selected>hF2: 300 km</option>
+    <option value=350>hF2: 350 km</option>
+    <option value=400>hF2: 400 km</option>
+    <option value=450>hF2: 450 km</option>
+    <option value=500>hF2: 500 km</option>
+    <option value=550>hF2: 550 km</option>
+  </select>
+
+  <select style="font-size: 30px" id="dist" name="dist" onchange="selChange()">
+    <option value=50 >Dist: 50 km</option>
+    <option value=100 selected>Dist: 100 km</option>
+    <option value=200>Dist: 200 km</option>
+    <option value=400>Dist: 400 km</option>
+    <option value=800>Dist: 800 km</option>
+    <option value=1500>Dist: 1500 km</option>
+    <option value=3000>Dist: 3000 km</option>
+    <option value=5000>Dist: 5000 km</option>
+    <option value=10000>Dist: 10000 km</option>
+    <option value=20000>Dist: 20000 km</option>
+  </select>
+  <br>
+  <!-- <button class="button button1" onclick="myTest1()">Tx: Dipole, 12m, 20W, 2deg</button>
+   <h2 id="str3">Transmiter: mast, antenna, power, site minimum elevation</h2> -->
+  <select style="font-size: 30px" id="antenna" name="antenna" onchange="selChange()">
+    <option value=1 selected>TxAnt: Dipole</option>
+    <option value=2>TxAnt: CASG-A1</option>
+    <option value=3>TxAnt: AS-F104</option>
+    <option value=4>TxAnt: RF-1944</option>
+    <option value=5>TxAnt: MIL-2</option>
+    <option value=6>TxAnt: WhipBnt</option>
+    <option value=7>TxAnt: Whip 3m</option>
+    <option value=8>TxAnt: HF230L</option>
+    <option value=9>TxAnt: CASG-A2</option>
+    <option value=10>TxAnt: Yagi 3el</option>
+    <option value=11>TxAnt: VertMono</option>
+  </select>
+
+  <select style="font-size: 30px" id="mast" name="mast" onchange="selChange()">
+    <option value=3>3 m up</option>
+    <option value=6>6 m up</option>
+    <option value=12 selected>12 m up</option>
+    <option value=18>18 m up</option> 
+    <option value=26>26 m up</option>
+  </select>   
+
+  
+  <select style="font-size: 30px" id="power" name="power" onchange="selChange()">
+    <option value=62>Pt: 1500 W</option>
+    <option value=56>Pt: 400 W</option>
+    <option value=52>Pt: 150 W</option>
+    <option value=43 selected>Pt: 20 W</option>
+    <option value=37>Pt: 5 W</option>
+    <option value=33>Pt: 2 W</option>
+  </select>
+
+  <select style="font-size: 30px" id="elmin" name="elmin" onchange="selChange()">
+    <option value=60>El 60 &deg</option>
+    <option value=45>El 45 &deg</option>
+    <option value=30>El 30 &deg</option>
+    <option value=20 selected>El 20 &deg</option>
+    <option value=15>El 15 &deg</option>
+    <option value=10>El 10 &deg</option>
+    <option value=5>El 5 &deg</option>
+    <option value=3 >El 3 &deg</option>
+    <option value=2>El 2 &deg</option>
+    <option value=1>El 1 &deg</option>
+  </select>
+  <select style="font-size: 30px" id="selGrx" name="selGrx" onchange="selChange()">
+    <option value=0 selected>Grx Off</option>  
+    <option value=1>Grx On</option>  
+    <option value=2>Grx-Avg</option>  
+  </select>
+  <br>
+  
+  <select style="font-size: 30px" id="antenna2" name="antenna2" onchange="selChange()">
+    <option value=1 selected>RxAnt: Dipole</option>
+    <option value=2>RxAnt: CASG-A1</option>
+    <option value=3>RxAnt: AS-F104</option>
+    <option value=4>RxAnt: RF-1944</option>
+    <option value=5>RxAnt: MIL-2</option>
+    <option value=6>RxAnt: WhipBnt</option>
+    <option value=7>RxAnt: Whip 3m</option>
+    <option value=8>RxAnt: HF230L</option>
+    <option value=9>RxAnt: CASG-A2</option>
+    <option value=10>RxAnt: Yagi 3el</option>
+    <option value=11>RxAnt: VertMono</option>
+  </select>
+
+  <select style="font-size: 30px" id="mast2" name="mast2" onchange="selChange()">
+    <option value=3 >3 m up</option>
+    <option value=6>6 m up</option>
+    <option value=12 selected>12 m up</option>
+    <option value=18>18 m up</option> 
+    <option value=26>26 m up</option>
+  </select>  
+
+  <select style="font-size: 30px" id="loc" name="loc" onchange="selChange()">
+    <option value=1 selected>Noise: Rural</option>
+    <option value=2>Noise: Suburb</option>
+    <option value=3>Noise: City</option>
+  </select>  
+
+  <select style="font-size: 30px" id="storm" name="storm" onchange="selChange()">
+    <option value=1 selected>Static: Quiet</option>
+    <option value=2>Static: Rainy</option>
+    <option value=3>Static: Storm</option> 
+    <option value=4>Static: BFS</option>
+  </select>
+
+
+</div>
+
+<canvas id="myCanvas" width="900" height="1100"> </canvas>    
+
+<script src="nvis.js"></script>
+<script src="antenna3.js"></script>
+<script src="antenna.js"></script>
+<script src="atten.js"></script>
+<!-- <script src="plotly-2.12.1.min.js"></script> -->
+<script src="nvisGui.js"></script>
+
+
+<script>
+  var nv = new myNvis("Nvis", 1);
+  nvisCheck(nv);
+  selChange(nv);
+
+  function selChange() { selUpdate(nv)};
+</script>
+
+</body>
+
+</html>

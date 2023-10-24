@@ -1,0 +1,79 @@
+<html>
+<head>
+
+</head>
+
+<body>
+<h1 id=str1>NVIS Help</h1>
+<h1><a href="index.html">Back to main page</a></h1>
+<h1>HF Radio Propagation Modes</h1>
+<p>Line of Sight (LOS) range is limited by terrain, most often to 2-10km.</p>
+<p>Ground Wave (GW) range is limited by terrain and ground conductivity to 10-60km.</p>
+<p>GW over salt water has 8,000 km range.</p>
+<p>SkyWave (SW) uses reflection from Ionosphere and covers entire Earth.</p>
+<p>NVIS uses reflection from Ionosphere and covers 0-600 km range.</p>
+<p>Ionosphere changes all the time, and optimal frequencies change with it.</p>
+<p>Any HF link using only one frequency will keep fading in and out!</p>
+<p>NVIS needs 2 frequencies: day and night. Extended range NVIS needs 1 more for noon/extended .</p>
+<p>NVIS is effective from almost any antenna site.</p>
+<p>SkyWave covers much longer distances than NVIS, but most antenna sites are not suitable.</p>
+<p>Obstacles and terrain often block low elevation angles used for Skywave.</p>
+
+<h2>Link setup (row 1)</h2>
+<p>View Select -options are: table, SNR plot, Skip plot, SLM plot or help</p>
+<p>......... View Table - detailed link data in table</p>
+<p>......... View SNR - plots signal to noise ratio traces</p>
+<p>......... View Skip - plots skip zone versus frequency</p>
+<p>......... View SLM - plots secant law multiplier versus elevation angle</p>
+<p>State – Australian state, latitude.</p>
+<p>Month –season of the year.</p>
+<p>Year –sunspot cycle progression</p>
+<p>hF2 - layer F2 height above ground</p>
+<p>Dist –terrestrial link distance</p>
+
+<h2>Transmiter setup (row 2)</h2>
+<p>Tx Ant – select transmit antenna type</p>
+<p>Mast –transmit antenna height</p>
+<p>Power – transmit power</p>
+<p>EL – minimum elevation angle for antenna site</p>
+<p>Grx – receive antenna gain use (off, on, avg)</p>
+<p>............Grx-off assumes gain Grx = 0 dB</p>
+<p>............Grx-on  uses gain Grx</p>
+<p>............Grx-Avg– uses gain Grx - Grx average</p>
+<p>HF receiver noise floor is under -130 dBm, while noise on lower HF is 30 dB higher.</p>
+<p>Rx antenna with 30 dB loss has both noise and signal attenuated, but SNR stays the same.</p>
+<p>Setting Grx-Avg takes this into account, and should be used with short Rx antennas.</p>
+
+<h2>Receiver setup (row 3)</h2>
+<p>Rx Ant – select receive antenna type</p>
+<p>Mast –transmit antenna height</p>
+<p>Location – rural, suburban, city</p>
+<p>Weather – storms affect NVIS</p>
+
+<h2>Results in rows 3 and 4 explained</h2>
+<p>foF2= F2 layer critical frequencies for: night, day and midday.</p>
+<p>SSN= smoothed sunspot number (solar cycle)</p>
+<p>SLM= Secant law frequency multiplier</p>
+<p>FOT= Frequencies of optimal transmission for: night, day and midday</p>
+<p>Hops= number of ionospheric hops in link</p>
+<p>El= elevation of wave vector, 0 degrees is towards horizon</p>
+<p>B= wave angle of incidence into F2 layer (normal is 0)</p>
+
+<h2>Results in table explained</h2>
+<p>f = frequency in MHz</p>
+<p>Eirp = efective isotropic radiated power in dBm</p>
+<p>Lfs = Free Space Path Loss in dB</p>
+<p>Ld = attenuation in D region dB, aka DRAP</p>
+<p>Lt = Lfs+Ld, total path loss in dB</p>
+<p>N = noise PSD in dBm for BW=3kHz (ITU recommendation)</p>
+<p>SNR = signal to noise ratio in dB (Bandwuidth BW=3kHz)</p>
+<p>SnrM = SNR during mid-day in dB</p>
+<p>SnrD = SNR during day in dB</p>
+<p>SnrN= SNR during night in dB</p>
+<p>Red fonts= frequency too high (no reflection)</p>
+<p>Minimum useful SNR is 5 dB for data, and 10 dB for voice.</p>
+
+<h1><a href="index.html">Back to main page</a></h1>
+
+</body>
+</html>
