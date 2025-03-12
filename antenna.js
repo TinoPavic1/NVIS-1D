@@ -1,9 +1,10 @@
 function antennaGain(nvis) {      // Gets Gtx and Grx and updates nvis class
-  var s1, s2, s3;                 // declare few strings
+  var s1, s2;                 // declare few strings
   var g=[-20.0,-20];              // initialise gain array
   var fr=nvis.freq, a=nvis.antenna,  h=nvis.mast, e=nvis.elev;  // ant parameters
   s1="antennaGain() ";            // needed for console debug
-  s2=fr.toFixed(1) + " e="+e.toFixed(1) + ", h=" + h.toFixed(1); // more console debug
+  s2=s1+"fr="+fr.toFixed(1) + " e="+e.toFixed(1) + ", h=" + h.toFixed(1); // more console debug
+  console.log(s2);  // show f,e and h
   // transmit antenna gain  g=[G,Gavg]
   g = myAntennaGain(a, fr, h, e);  
   nvis.gain=g[0];                  // update nvis class gain= Gtx
@@ -14,10 +15,8 @@ function antennaGain(nvis) {      // Gets Gtx and Grx and updates nvis class
   nvis.gain2=0;                                 // case Grx off              
   if(nvis.grxMode == 1) nvis.gain2=g[0];        // case Grx on     
   if(nvis.grxMode == 2) nvis.gain2=g[0]-g[1];   // case Grx-Avg
-  // console debug
-  s3=" Gtx=" + nvis.gain.toFixed(1) + ",Grx=" + nvis.gain2.toFixed(1);  
-  //console.log(s1 + "Rx " + s2 + s3); 
-  console.log(s1 + s3) ;
+  s2=s1+" Gtx=" + nvis.gain.toFixed(1) + ",Grx=" + nvis.gain2.toFixed(1);  
+  console.log(s2) ;   // show gains on console
   return g;
 }
 
@@ -65,6 +64,5 @@ function myAntennaGain(a, fr, h, e) {
   if(a == 16)  {  // HT-21B is very similar to dipole
     g=antennaDipole(fr, h, e);  g[0] -= 2;  g[1] -=2;
   }
-
   return g;
 }

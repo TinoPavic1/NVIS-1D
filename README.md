@@ -112,7 +112,7 @@ canvasSkip() - plots traces of skip distance for: night, day and midday
 
 6. Antenna related
 Functions are contained in antenna.js file.
-Antenna gain is calculated as function of: frequency, height above ground and wave elevation angle.
+Antenna gain is calculated as function of: frequency, height and wave elevation angle
 
 
 
