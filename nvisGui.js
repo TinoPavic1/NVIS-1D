@@ -170,12 +170,12 @@ function canvasTable(nvis) {      // drawing table on canvas
   ctx.fillText("Lfs is signal loss over signal path in dB units (daily maximum).", 1, y); y+=25;
   ctx.fillText("Ld (DRAP) is signal loss in D layer in dB (daily maximum).", 1, y); y+=25;
   ctx.fillText("Lt is total signal loss(Fspl+Drap) in dB (daily maximum).", 1, y); y+=25;
-  ctx.fillText("N is noise power at receive location in dBm units, for BW=3kHz.", 1, y); y+=25;
+  ctx.fillText("N is noise power in dBm, for 3kHz bandwidth.", 1, y); y+=25;
   ctx.fillText("Snr is ratio of signal S and noise N in dB units.", 1, y); y+=25;
   ctx.fillText("SnrM/D/N are Snr levels for midday/day/night.", 1, y); y+=25;
   ctx.fillStyle="red"; 
-  ctx.fillText("Signal must overcome noise, in order to be received.", 1, y); y+=25;
-  ctx.fillText("Minimum SNR is 10 dB for SSB voice, and -20 dB for data.", 1, y); y+=25;
+  ctx.fillText("To be received, signal must overcome noise in given bandwidth.", 1, y); y+=25;
+  ctx.fillText("Minimum SNR is 10 dB for SSB voice, -1 dB for MELP600 and -25 dB for data.", 1, y); y+=25;
 }
 
 function canvasSNR(nvis) {    // drawing SNR on canvas
@@ -188,7 +188,7 @@ function canvasSNR(nvis) {    // drawing SNR on canvas
   // Work out grid dimensions
   var i, rows=12, cols=15;            //Grid with 12 rows and 15 columns
   var margL=50, margR=20, margT=30, margB=500;  //Margins - left, right, top,botom,
-  var xDiv=2, yDiv=6;
+  var xDiv=2, yDiv=8; // x axes 2MHz/div, y axes 8dB/div
   var rowH = Math.round(( nvis.canH - margT- margB )/rows); rowH -= 1;
   var colW = Math.round((nvis.canW-margL-margR)/cols);   colW -= 1;
   var xMin,xMax, yMin,yMax;         // grid min max coordinates
@@ -228,12 +228,12 @@ function canvasSNR(nvis) {    // drawing SNR on canvas
   // Mark y axes
   x = margL - 25;   y = yMax - rowH +5;
   for(i=1; i<rows; i++) { 
-    s = yDiv*i - 12;
+    s = yDiv*i - 30;
     ctx.fillText(s, x, y);
     y -= rowH;
   }
   // Draw plot title 
-  s3="Signal to noise ratio (SNR) 6 dB/div";  
+  s3="Signal to noise ratio (SNR) 8 dB/div";  
   ctx.fillText(s3, nvis.canW/2, margT+25);
   // Plot SNR data
   ctx.lineWidth=2;
@@ -243,9 +243,9 @@ function canvasSNR(nvis) {    // drawing SNR on canvas
   ctx.moveTo(x, yMax);
   for ( i=0; i<58; i++) {   
     sg = nvis.snrM[i];
-    if(sg < -12.0)  sg=-12.0;
-    if(sg > 60)     sg=60;
-    y = sg * rowH / yDiv + 2*rowH;  
+    if(sg < -32.0)  sg=-32.0;
+    if(sg > 64)     sg=64;
+    y = sg * rowH / yDiv + 4*rowH;  
     y=Math.round(yMax-y);
     x = fr * colW / xDiv;  
     x=Math.round(xMin+x);
@@ -261,9 +261,9 @@ function canvasSNR(nvis) {    // drawing SNR on canvas
   ctx.moveTo(x, yMax);
   for ( i=0; i<58; i++) {   
     sg = nvis.snrD[i];
-    if(sg<-12.0)  sg=-12.0;
-    if(sg>60)   sg=60;
-    y = sg * rowH / yDiv + 2*rowH;  
+    if(sg<-32.0)  sg=-32.0;
+    if(sg>64)   sg=64;
+    y = sg * rowH / yDiv + 4*rowH;  
     y=Math.round(yMax-y);
     x = fr * colW / xDiv;  
     x=Math.round(xMin+x);
@@ -279,9 +279,9 @@ function canvasSNR(nvis) {    // drawing SNR on canvas
   ctx.moveTo(x, yMax);
   for ( i=0; i<58; i++) {   
     sg = nvis.snrN[i];
-    if(sg<-12.0)  sg=-12.0;
-    if(sg>60)   sg=60;
-    y = sg * rowH / yDiv + 2*rowH;  
+    if(sg<-32.0)  sg=-32.0;
+    if(sg>64)   sg=64;
+    y = sg * rowH / yDiv + 4*rowH;  
     y=Math.round(yMax-y);
     x = fr * colW / xDiv;  
     x=Math.round(xMin+x);
@@ -294,8 +294,8 @@ function canvasSNR(nvis) {    // drawing SNR on canvas
   ctx.fillStyle="blue";      y=yMax+50;  
   ctx.fillText("Graph shows SNR levels for midday, day and night.", 1, y); y+=30;
   ctx.fillText("SNR is ratio of signal S and noise N in decibel (dB) units.", 1, y); y+=30;
-  ctx.fillText("Signal must overcome noise, in order to be received.", 1, y); y+=30;
-  ctx.fillText("Minimum SNR is 10 dB for SSB voice, and 6 dB for data.", 1, y); y+=30;
+  ctx.fillText("To be received, signal must overcome noise in given bandwidth.", 1, y); y+=30;
+  ctx.fillText("Minimum SNR is 10 dB for SSB voice, -1 dB for MELP600 and -25 dB for data.", 1, y); y+=30;
   ctx.fillText("Better antenna and more power can improve SNR.", 1, y); y+=30;
   ctx.font="bold 20px arial"; ctx.fillStyle = "red";
   ctx.fillText("Using Frequency of Optimal Transmission (FOT) is the single most important factor.", 1, y); y+=30;

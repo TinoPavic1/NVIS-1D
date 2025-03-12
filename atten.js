@@ -35,7 +35,7 @@ function calcDrap(nvis) {   // calculate D region absorption
   //console.log("calcDrap(1) ls=" +ls + ", ld=" + ld.toFixed(0) + ", ld2=" + ld2.toFixed(0));
   // Frequency correction
   var n = 2.2 / nvis.freq;      // freq ratio with 2.2 MHz
-  var n2 = Math.pow(n, 1.5);    // ratio to power of 1.5  
+  var n2 = Math.pow(n, 2);    // ratio to power of 2  
   ld3 *= n2;                    // frequency correction
   var ld4 = ld3 * nvis.hops;    // multihop link DRAP correction
   //console.log("calcDrap(2) a=" + a.toFixed(0) + ", ld3=" + ld3.toFixed(0) + ",'ld4=" + ld4.toFixed(0));

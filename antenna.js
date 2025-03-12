@@ -46,8 +46,8 @@ function myAntennaGain(a, fr, h, e) {
     g=antennaDipole(fr, h, e);  g[0] += 5;  g[1] += 5;
   }
   if(a == 11) g=antennaVertMono(fr, h, e);
-  if(a == 12)  {  // OE-505 is like whip 3m - 3 dB
-    g=antennaWhp3M(fr, h, e);  g[0] -= 3;  g[1] -= 3;
+  if(a == 12)  {  // OE-505 is like whip 3m - 6 dB
+    g=antennaWhp3M(fr, h, e);  g[0] -= 6;  g[1] -= 6;
   }
   if(a == 13)  {  // DAE is like short dipole 3m high
     g=antennaDipole(fr, 3, e);
@@ -57,6 +57,13 @@ function myAntennaGain(a, fr, h, e) {
     if(fr<6.5)  { g[0] -= 6;    g[1] -= 6;  }
     if(fr<8.5)  { g[0] -= 3;    g[1] -= 3;  }
     if(fr<10.5) { g[0] -= 1;    g[1] -= 1;  } 
+  }
+  if(a == 14)  g=antennaCasgA2(fr, h, e);   // RF-1950 is like CASG-A2
+  if(a == 15)  {  // RF-1912 is very similar to dipole
+    g=antennaDipole(fr, h, e);  g[0] -= 3;  g[1] -=3;
+  }
+  if(a == 16)  {  // HT-21B is very similar to dipole
+    g=antennaDipole(fr, h, e);  g[0] -= 2;  g[1] -=2;
   }
 
   return g;

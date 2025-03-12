@@ -254,13 +254,13 @@ function calcSNR(nvis) {    // frequency scan
     //nvis.snrM[i] = nvis.eirp + nvis.gain2 - li - ld - n; // MidDay Snr
     nvis.snrM[i] = nvis.eirp - li - ld - n + nvis.gain2; // MidDay Snr
     mf= nvis.muf3*1.2;
-    if(nvis.freq > mf) nvis.snrM[i] = -30.0;
+    if(nvis.freq > mf) nvis.snrM[i] = -50.0;
     nvis.snrD[i] = nvis.snrM[i] + 0.3333 * ld;       // Day SNR
     mf = nvis.muf2 * 1.2; 
-    if(nvis.freq > mf) nvis.snrD[i] = -30.0;
+    if(nvis.freq > mf) nvis.snrD[i] = -50.0;
     nvis.snrN[i] = nvis.snrM[i] + ld - 10;      // Night SNR
     mf = nvis.muf1 * 1.2; 
-    if(nvis.freq > mf) nvis.snrN[i] = -30.0;
+    if(nvis.freq > mf) nvis.snrN[i] = -50.0;
     mf = nvis.freq / nvis.fc3;                    // Midday frequency radio
     if(i==0 || i==10) console.log("calcSNR("+nvis.freq.toFixed(2)+") FSPL="+nvis.Lii[i].toFixed(0)); 
     nvis.freq += 0.5
