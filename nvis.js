@@ -125,53 +125,53 @@ function calcHops(nvis) {   // No of hops, limited by minimum site elevation
 
 function calcCoe(nvis) { // Current SSN, cycleCoe, seasonCoe, latCoe
   var yr = (12*nvis.year+ nvis.month)/12;
-  nvis.cycleCoe = 1.0 - (Math.abs(2025.5 - yr)) / 6.0; 
-  nvis.ssn = nvis.cycleCoe * 170;
-  //console.log("cycleCor() Yr=" + nvis.year + ",cycleCoe=" + nvis.cycleCoe);
+  nvis.cycleCoe = 1.0 - (Math.abs(2025 - yr)) / 6.0; 
+  nvis.ssn = nvis.cycleCoe * 155;
   nvis.seasonCoe = (Math.abs(nvis.month - 6.0)) / 6.0;
-  //console.log("cycleCor() Mo=" + nvis.month + ",seasonCoe=" + nvis.seasonCoe);
-  nvis.latCoe = (nvis.lat + 43) / 31;
+  nvis.latCoe =1.0 - (Math.abs(nvis.lat/45));
+  console.log("cycleCor() cycleCoe=" + nvis.cycleCoe.toFixed(3) + ", seasonCoe=" + nvis.seasonCoe.toFixed(3));
+  console.log("cycleCor() SSN=" + nvis.ssn.toFixed(3));
   console.log("cycleCor() lat=" + nvis.lat.toFixed(3) + ", latCoe=" + nvis.latCoe.toFixed(3));
+
+  // adjust to current observed SSN 
+  // nvis.ssn = 115.0;     
+  // nvis.cycleCoe = 170.0/115.0;
 } 
 
 function calcfoF2(nvis) {  // foF2 daily minimum   min 2.0, lat+0.5, fold at S 23 
-  var c, d, e, f;
-  c = nvis.latCoe;  d = nvis.seasonCoe; e = nvis.cycleCoe;  
   // find minimum foF2
-  f = 1.8 + (d * 0.8);     // winter 1.8, summer 2.6
-  f *= (e + 1);            // Solar peak doubles
-  if(f < 1.8) { f = 1.8;}    // Low limit
-  if(f > 6.5) { f = 6.5;}    // hi limit
+  var f = 1.8 + nvis.seasonCoe;     // deep south, winter 1.8 and summer 2.8
+  f += 1.4 * nvis.latCoe;           // add up to 1.4 for location (Darwin)
+  f *= 1 + nvis.cycleCoe;           // Solar peak doubles (3.4 to 7.8)
+  if(f < 1.8) { f = 1.8;}           // Low limit
+  if(f > 7.0) { f = 7.0;}           // hi limit
   nvis.fc1=f;
   // find maximum foF2 
-  c=nvis.latCoe;  d = nvis.seasonCoe; e = nvis.cycleCoe;
-  f = 4.7 + c;             // low season first 4.7 to 5.7
-  if(d > 0.5  &&  c < 0.65 ) { d = 0.5 }  // summer and equinox equal
-  f *= 1 + 0.9*d;   // summer almost doubles in tropics
-  f *= (1 + 1.8*e);   // half cycle is 10% improvement
-  if(f < 4.7)  { f = 4.7; } 
-  if(f > 14.3) { f = 14.3;}
+  var c = 1.5 + 1.05*nvis.latCoe; 
+  f *= c; 
+  if(f < 5.0)  { f = 5.0; } 
+  if(f > 14.0) { f = 14.0;}
   nvis.fc3 = f;                   // daily maximum
-  nvis.fc2 = (f + nvis.fc1) / 2;    // mid value
+  nvis.fc2 = (nvis.fc1 + nvis.fc3) / 2;    // mid value
   console.log("caclfoF2() fc1=" + nvis.fc1.toFixed(1) + ", fc3=" + nvis.fc3.toFixed(1));
 } 
 
 
 function latestfoF2(nvis) {  // current foF2 min max from Ionosondes
   var t=nvis.lat;
-  var f1=4.5, f3=8.0;          // Mawson Station, Antarctica   
-  if(t>-50) {f1=4.5; f3=8.2; } // Hobart
-  if(t>-40) {f1=5.2; f3=10.5; } // Learmonth, Vic
-  if(t>-36) {f1=5.7; f3=8.8; } // Canberra
-  if(t>-34.5) {f1=5.6; f3=9.1; } // Camden, Sydney
-  if(t>-32.5) {f1=5.7; f3=9.2; } // Perth
-  if(t>-31) {f1=6.7;  f3=11.3;  } // Brisbane
-  if(t>-23) {f1=7.2; f3=13.2; }    // Townsville
+  var f1=3.0, f3=6.0;          // Mawson Station, Antarctica   
+  if(t>-50) {f1=4.2; f3=6.5; } // Hobart
+  if(t>-40) {f1=4.8; f3=8.8; } // Learmonth, Vic
+  if(t>-36) {f1=4.7; f3=8.7; } // Canberra
+  if(t>-34.5) {f1=5.0; f3=9.5; } // Camden, Sydney
+  if(t>-32.5) {f1=5.1; f3=9.5; } // Perth
+  if(t>-31) {f1=6.3;  f3=10.2;  } // Brisbane
+  if(t>-23) {f1=6.0; f3=14.0; }    // Townsville
   if(t>-15) {f1=7.5; f3=15.5; }   // Darwin
   f2 = (f1+f3)/2;// adjust f2
   console.log("latestfoF2(), f1= " + f1.toFixed(1) + ",f3=" + f3.toFixed(1));
   // Mix with prediction
-  var ye=2025, mo=12, da=11;   // date when Ionosonde adjusted  
+  var ye=2026, mo=2, da=9;    // date when Ionosonde adjusted  
   var d1 = ye*365 + mo*30.5 + da;
   var d2 = nvis.year*365 + nvis.month*30.5 + 15; // adjustment age in days
   var me=(d2-d1)/90; me=Math.abs(me); // mix factor
