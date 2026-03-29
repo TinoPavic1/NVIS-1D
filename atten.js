@@ -58,7 +58,7 @@ function calcNoise(nvis) {     // ITU recommendation for radio noise ITU-R P.373
   if(nvis.storm == 2)  ab += (a-b) / 3;
   if(nvis.storm == 3)  ab += (a-b) / 2;
   if(nvis.storm == 4)  ab = a;
-  //console.log(s + " a=", a.toFixed(0) + ", b= "+ b.toFixed(0) + ", ab=" + ab.toFixed(0));
+  console.log(s + " a=", a.toFixed(0) + ", b= "+ b.toFixed(0) + ", ab=" + ab.toFixed(0));
   // man made noise, quiet receiving site  
   var c = 48 - 28.75 * Math.log10(f/1.5); // 48 at 1.5 MHz, 0 at 70 MHz   
   // man made noise, city
@@ -67,7 +67,7 @@ function calcNoise(nvis) {     // ITU recommendation for radio noise ITU-R P.373
   var ce = c;                             // rural
   if(nvis.location == 3)  ce = e;         // city
   if(nvis.location == 2)  ce = (c+e)/2;   // subburb in between  
-  //console.log(s + " c=", c.toFixed(0) + ", e= "+ e.toFixed(0) + ", ce=" + ce.toFixed(0));
+  console.log(s + " c=", c.toFixed(0) + ", e= "+ e.toFixed(0) + ", ce=" + ce.toFixed(0));
   // galactic noise
   var d = 0;                                // 0 under 3 MHz
   if(f > 3) d = 20 + 136 * Math.log10(f/3);   // 20 at 3 MHz, 37 at 4 MHz
@@ -77,7 +77,7 @@ function calcNoise(nvis) {     // ITU recommendation for radio noise ITU-R P.373
   var n = ab;
   if(ce > n)   n = ce;  
   if( d > n)   n = d;
-  //console.log(s+"d=" + d.toFixed(0) + ", n=" + n.toFixed(0) + ", n+139=" + (n-139).toFixed(0));
+  console.log(s+"d=" + d.toFixed(0) + ", n=" + n.toFixed(0) + ", n+139=" + (n-139).toFixed(0));
   return (n - 139.0);    // Johnston Nyquist noise level for BW=3 kHz
 }
 
